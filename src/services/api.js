@@ -241,133 +241,65 @@ export const mockSearchReddit = async (query) => {
   // Simulate network delay
   await new Promise(resolve => setTimeout(resolve, 1500));
   
-  // Mock data with variations based on query
+  // Normalize query for matching
+  const normalizedQuery = query.toLowerCase();
+  
+  // Different titles based on search term
+  let titles = [];
+  if (normalizedQuery.includes("pendo") || normalizedQuery.includes("listen")) {
+    titles = [
+      `Is ${query} worth the money?`,
+      `${query} vs traditional surveys`,
+      `${query} missing critical features`,
+      `How we improved our product with ${query}`,
+      `Alternatives to ${query} in 2025?`
+    ];
+  } else if (normalizedQuery.includes("figma")) {
+    titles = [
+      `${query} performance issues with large files`,
+      `Best ${query} plugins for UX designers`,
+      `${query} vs Adobe XD comparison`,
+      `How we streamlined our design process with ${query}`,
+      `${query} enterprise vs standard features`
+    ];
+  } else if (normalizedQuery.includes("slack")) {
+    titles = [
+      `${query} search functionality problems`,
+      `Best ${query} integrations for product teams`,
+      `${query} vs Microsoft Teams comparison`,
+      `How we organize our ${query} channels`,
+      `${query} notification overload solutions`
+    ];
+  } else {
+    titles = [
+      `${query} user review - worth the price?`,
+      `${query} vs competitors in 2025`,
+      `${query} integration issues`,
+      `How we improved our workflow with ${query}`,
+      `${query} feature requests`
+    ];
+  }
+  
+  // Generate mock posts with the custom titles
   return {
-    posts: [
-      {
-        id: 'post1',
-        title: `Is ${query} worth the money?`,
-        text: `I've been considering buying ${query} for my team, but I'm not sure if it's worth the investment. Has anyone here used it?`,
-        url: '#',
-        author: 'curious_user',
-        subreddit: 'ProductManagement',
-        upvotes: 45,
-        comments: [
-          {
-            id: 'comment1',
-            text: `We've been using ${query} for about 6 months now. It's been really useful for gathering customer feedback.`,
-            author: 'happy_customer',
-            upvotes: 12
-          },
-          {
-            id: 'comment2',
-            text: `The onboarding process for ${query} was a bit confusing, but their support team was helpful.`,
-            author: 'new_user',
-            upvotes: 5
-          }
-        ]
-      },
-      {
-        id: 'post2',
-        title: `${query} vs competitors`,
-        text: `I'm trying to decide between ${query} and some alternatives. What are the key differences?`,
-        url: '#',
-        author: 'decision_maker',
-        subreddit: 'SaaS',
-        upvotes: 78,
-        comments: [
-          {
-            id: 'comment3',
-            text: `${query} has better analytics, but the API is more limited compared to others.`,
-            author: 'tech_expert',
-            upvotes: 22
-          },
-          {
-            id: 'comment4',
-            text: `I've tried three different solutions and ${query} had the best UX by far.`,
-            author: 'ux_designer',
-            upvotes: 15
-          }
-        ]
-      },
-      {
-        id: 'post3',
-        title: `${query} integration issues`,
-        text: `Having trouble integrating ${query} with our existing tech stack. Any advice?`,
-        url: '#',
-        author: 'frustrated_dev',
-        subreddit: 'webdev',
-        upvotes: 32,
-        comments: [
-          {
-            id: 'comment5',
-            text: `Their documentation is outdated. I had to contact support to get it working.`,
-            author: 'dev_lead',
-            upvotes: 8
-          },
-          {
-            id: 'comment6',
-            text: `We built a custom connector to make it work with our system. Would be great if they had better integration options.`,
-            author: 'solutions_architect',
-            upvotes: 19
-          }
-        ]
-      },
-      {
-        id: 'post4',
-        title: `How we improved our product with insights from ${query}`,
-        text: `Case study: How we used ${query} to prioritize our roadmap and increase customer satisfaction by 32%`,
-        url: '#',
-        author: 'success_story',
-        subreddit: 'ProductManagement',
-        upvotes: 112,
-        comments: [
-          {
-            id: 'comment7',
-            text: `Great write-up! We had similar results. The sentiment analysis helped us identify issues we didn't know existed.`,
-            author: 'product_manager',
-            upvotes: 28
-          },
-          {
-            id: 'comment8',
-            text: `Did you find the theme clustering accurate? We sometimes get weird results.`,
-            author: 'data_scientist',
-            upvotes: 14
-          }
-        ]
-      },
-      {
-        id: 'post5',
-        title: `${query} missing critical features`,
-        text: `I like ${query} overall but there are some basic features missing that would make it much more useful.`,
-        url: '#',
-        author: 'feature_requester',
-        subreddit: 'UXResearch',
-        upvotes: 65,
-        comments: [
-          {
-            id: 'comment9',
-            text: `Agreed! They need better export options and the ability to create custom dashboards.`,
-            author: 'power_user',
-            upvotes: 23
-          },
-          {
-            id: 'comment10',
-            text: `I've been asking for API improvements for months. It's frustrating because everything else is great.`,
-            author: 'integration_specialist',
-            upvotes: 31
-          },
-          {
-            id: 'comment11',
-            text: `The lack of real-time alerts is a deal-breaker for our team.`,
-            author: 'monitoring_fan',
-            upvotes: 17
-          }
-        ]
-      }
-    ]
+    posts: titles.map((title, index) => ({
+      id: `post${index + 1}`,
+      title: title,
+      text: `This is a discussion about ${title.toLowerCase()}. The content would include various opinions and experiences.`,
+      url: '#',
+      author: `user${index + 1}`,
+      subreddit: index % 2 === 0 ? 'ProductManagement' : 'SaaS',
+      upvotes: Math.floor(Math.random() * 120) + 20,
+      comments: Array(Math.floor(Math.random() * 5) + 2).fill(0).map((_, commentIndex) => ({
+        id: `comment${index}_${commentIndex}`,
+        text: `Comment about ${title.toLowerCase()}. This would contain user opinions and feedback.`,
+        author: `commenter${commentIndex}`,
+        upvotes: Math.floor(Math.random() * 30) + 1
+      }))
+    }))
   };
 };
+
 
 export const mockAnalyzeData = async (posts, query) => {
   // Simulate network delay
