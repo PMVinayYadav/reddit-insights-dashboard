@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Search, BarChart3, MessageSquare, Lightbulb, Loader2 } from 'lucide-react';
-import { mockSearchReddit, mockAnalyzeData } from '../services/api';
+import { mockSearchReddit, mockAnalyzeData } from './services/api';
 
 const RedditInsightsDashboard = () => {
   const [searchTerm, setSearchTerm] = useState('');
