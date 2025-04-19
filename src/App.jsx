@@ -48,7 +48,7 @@ const RedditInsightsDashboard = () => {
       {/* Header */}
       <header className="bg-white shadow-sm p-4 border-b">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <h1 className="text-xl font-bold text-indigo-700">Reddit Insights Dashboard</h1>
+          <h1 className="text-xl font-bold text-indigo-700">Pendo Listen AI Simulator</h1>
           <span className="text-xs bg-indigo-100 text-indigo-800 px-2 py-1 rounded">MVP Demo</span>
         </div>
       </header>
@@ -268,7 +268,7 @@ const RedditInsightsDashboard = () => {
       
       {/* Footer */}
       <footer className="bg-white border-t p-4 text-center text-sm text-gray-500">
-        Reddit Insights Dashboard MVP &copy; 2025
+        Pendo Listen AI Simulator MVP &copy; 2025
       </footer>
     </div>
   );
